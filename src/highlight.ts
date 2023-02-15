@@ -9,8 +9,11 @@ type StaticWeight = {
   };
 
 var background:string[]; 
-background = ["#965454","#FFFFe5","#FFFFe5","#FFFFcc","#d2d22d","#663d00","#804c00","#995b00","#b36a00","#cc7900","#e5e600"]; //orange
-
+//background = ["#000000","#000000","#1a0f00","#331e00","#4d2d00","#663d00","#804c00","#995b00","#b36a00","#cc7900","#e68900"]; //orange(995b00)
+//background = ["#000000","#000000","#1a0019","#1a0019","#1a0019","#330033","#4d004c","#660065","#80007f","#990098","#e68900"]; //purple(80007f)
+//background = ["#000000","#000000","#1a0019","#1a0019","#1a0019","#000033","#000066","#000080","#000099","#0000b3","#0000b3"]; //bule
+//background = ["#201c1c","#201c1c","#201c1c","#201c1c","#3a221b","#532819","#6d2f18","#873517","#a03b15","#ba4114","#ba4114"]; //dark orange
+background = ["#201c1c","#201c1c","#201c1c","#201c1c","#3b2521","#552f25","#70382a","#8b412f","#a54b33","#c05438","#a94329"]; //dark orange2
 export const highlightTarget = (obj: object) => {
 
     let highlightThreshold = 0.5;
@@ -29,13 +32,11 @@ export const highlightWord = (staticWeight: StaticWeight) => {
      // 创建装饰器
      const decorator = vscode.window.createTextEditorDecorationType({
         overviewRulerLane: vscode.OverviewRulerLane.Center,
-        borderRadius: '0.5px',
+        borderRadius: '1px',
         //color: '#001433',
         //color: new vscode.ThemeColor('workbench.preferredDarkColorTheme') ,
-        fontWeight: 'bold',
-        //color: '#fff',
-        // set background color according to weight
-        backgroundColor: background[staticWeight.weight*10],
+        //fontWeight: 'bold',
+        backgroundColor: background[staticWeight.weight*10], // set background color according to weight
     });
 
     // 获取可见编辑器实例

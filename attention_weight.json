@@ -3,5 +3,6 @@
 {"id":1, "start":167, "end":173, "content":"String ", "weight":0.6},
 {"id":2, "start":174, "end":183, "content":"minWindow ", "weight":0.7},
 {"id":3, "start":184, "end":193, "content":"String s, ", "weight":0.8},
-{"id":4, "start":194, "end":201, "content":"String t", "weight":0.9}
+{"id":4, "start":194, "end":201, "content":"String t", "weight":0.9},
+{"id":4, "start":202, "end":204, "content":"String t", "weight":0.5}
 ]
