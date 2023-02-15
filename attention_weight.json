@@ -1,1 +1,9 @@
-[{"id":0, "start":0, "end":2, "content":"def", "weight":0.8},{"id":1, "start":3, "end":3, "content":" ", "weight":0.1},{"id":1, "start":4, "end":10, "content":" ", "weight":0.3}]
+[{"id":0, "start":0, "end":2, "content":"def", "weight":0.7},
+{"id":1, "start":3, "end":3, "content":" ", "weight":0.1},
+{"id":2, "start":4, "end":10, "content":"printme", "weight":0.6},
+{"id":3, "start":11, "end":11, "content":"(", "weight":0.1},
+{"id":4, "start":12, "end":14, "content":"str", "weight":0.8},
+{"id":5, "start":15, "end":16, "content":"):", "weight":0.1},
+{"id":6, "start":17, "end":20, "content":"   ", "weight":0.1},
+{"id":7, "start":21, "end":25, "content":"print", "weight":0.9}
+]
