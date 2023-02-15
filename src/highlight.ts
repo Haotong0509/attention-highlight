@@ -9,15 +9,15 @@ type StaticWeight = {
   };
 
 var background:string[]; 
-background = ["#965454","#FFFFe5","#FFFFcc","#d2d22d","#d9d926","#dfdf20","#e5e619","#ecec13","#f2f20d","#f9f906","#FFFF00"];
+background = ["#965454","#FFFFe5","#FFFFe5","#FFFFcc","#d2d22d","#663d00","#804c00","#995b00","#b36a00","#cc7900","#e5e600"]; //orange
 
 export const highlightTarget = (obj: object) => {
 
-    let highlightThreshold = 0.6;
+    let highlightThreshold = 0.5;
     let staticWeight = obj as StaticWeight[];
 
     for(let i = 0; i < staticWeight.length; i++){
-        if(staticWeight[i].weight > highlightThreshold){
+        if(staticWeight[i].weight >= highlightThreshold){
             highlightWord(staticWeight[i]);
         }
     }
@@ -30,7 +30,9 @@ export const highlightWord = (staticWeight: StaticWeight) => {
      const decorator = vscode.window.createTextEditorDecorationType({
         overviewRulerLane: vscode.OverviewRulerLane.Center,
         borderRadius: '0.5px',
-        color: '#000000',
+        //color: '#001433',
+        //color: new vscode.ThemeColor('workbench.preferredDarkColorTheme') ,
+        fontWeight: 'bold',
         //color: '#fff',
         // set background color according to weight
         backgroundColor: background[staticWeight.weight*10],

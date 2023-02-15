@@ -1,9 +1,7 @@
-[{"id":0, "start":0, "end":2, "content":"def", "weight":0.7},
-{"id":1, "start":3, "end":3, "content":" ", "weight":0.1},
-{"id":2, "start":4, "end":10, "content":"printme", "weight":0.6},
-{"id":3, "start":11, "end":11, "content":"(", "weight":0.1},
-{"id":4, "start":12, "end":14, "content":"str", "weight":0.8},
-{"id":5, "start":15, "end":16, "content":"):", "weight":0.1},
-{"id":6, "start":17, "end":20, "content":"   ", "weight":0.1},
-{"id":7, "start":21, "end":25, "content":"print", "weight":0.9}
+[
+{"id":0, "start":160, "end":166, "content":"public ", "weight":0.5},
+{"id":1, "start":167, "end":173, "content":"String ", "weight":0.6},
+{"id":2, "start":174, "end":183, "content":"minWindow ", "weight":0.7},
+{"id":3, "start":184, "end":193, "content":"String s, ", "weight":0.8},
+{"id":4, "start":194, "end":201, "content":"String t", "weight":0.9}
 ]

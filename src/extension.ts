@@ -19,7 +19,7 @@ export function activate(context: vscode.ExtensionContext) {
 		// The code you place here will be executed every time your command is executed
 		// Display a message box to the user
 		vscode.window.showInformationMessage('Hello World!');
-		//openFile('/Users/haotong/attention-highlight/sample.py');
+		openFile('/Users/haotong/attention-highlight/sample.java');
 		let weightData = parseWeight('/Users/haotong/attention-highlight/attention_weight.json');
 		//console.log(weightData);
 		highlightTarget(weightData);
