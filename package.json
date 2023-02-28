@@ -15,6 +15,10 @@
       {
         "command": "attention-highlight.staticHighlight",
         "title": "Static Highlight"
+      },
+      {
+        "command": "attention-highlight.staticBold",
+        "title": "Static Bold"
       }
     ]
   },

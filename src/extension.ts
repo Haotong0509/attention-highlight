@@ -2,6 +2,7 @@
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
 import { highlightTarget } from './highlight';
+import { boldTarget } from './bold';
 import { parseWeight } from './parse_weight';
 
 // This method is called when your extension is activated
@@ -15,17 +16,26 @@ export function activate(context: vscode.ExtensionContext) {
 	// The command has been defined in the package.json file
 	// Now provide the implementation of the command with registerCommand
 	// The commandId parameter must match the command field in package.json
-	let disposable = vscode.commands.registerCommand('attention-highlight.staticHighlight', () => {
+	let highlight = vscode.commands.registerCommand('attention-highlight.staticHighlight', () => {
 		// The code you place here will be executed every time your command is executed
 		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World!');
+		//vscode.window.showInformationMessage('Hello World!');
 		openFile('/Users/haotong/attention-highlight/sample.py');
 		let weightData = parseWeight('/Users/haotong/attention-highlight/attention_weight.json');
 		//console.log(weightData);
 		highlightTarget(weightData);
 	});
+	let bold = vscode.commands.registerCommand('attention-highlight.staticBold', () => {
+		// The code you place here will be executed every time your command is executed
+		// Display a message box to the user
+		//vscode.window.showInformationMessage('Hello World!');
+		openFile('/Users/haotong/attention-highlight/sample.py');
+		let weightData = parseWeight('/Users/haotong/attention-highlight/attention_weight.json');
+		//console.log(weightData);
+		boldTarget(weightData);
+	});
 
-	context.subscriptions.push(disposable);
+	context.subscriptions.push(highlight, bold);
 }
 
 // export async function openFile(path: string) {
