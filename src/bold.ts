@@ -29,6 +29,7 @@ export const boldWord = (staticWeight: StaticWeight) => {
      const decorator = vscode.window.createTextEditorDecorationType({
         overviewRulerLane: vscode.OverviewRulerLane.Center,
         fontWeight: 'bold',
+        //border: '1px solid white;'
     });
 
     // get the active text editor
