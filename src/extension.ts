@@ -1,7 +1,7 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
-import { highlightTarget } from './highlight';
+import { dynamicHighlightTarget, highlightTarget } from './highlight';
 import { boldTarget } from './bold';
 import { highlightBoldTarget } from './highlight_bold';
 import { borderTarget } from './border';
@@ -18,6 +18,7 @@ export function activate(context: vscode.ExtensionContext) {
 	// The command has been defined in the package.json file
 	// Now provide the implementation of the command with registerCommand
 	// The commandId parameter must match the command field in package.json
+	// Static Highlight
 	let staticHighlight = vscode.commands.registerCommand('attention-highlight.staticHighlight', () => {
 		// The code you place here will be executed every time your command is executed
 		// Display a message box to the user
@@ -27,21 +28,40 @@ export function activate(context: vscode.ExtensionContext) {
 		//console.log(weightData);
 		highlightTarget(weightData);
 	});
+	// Dynamic Highlight
 	let dynamicHighlight = vscode.commands.registerCommand('attention-highlight.dynamicHighlight', () => {
 		openFile('/Users/haotong/attention-highlight/sample.py');
 		let weightData = parseWeight('/Users/haotong/attention-highlight/attention_weight.json');
-		highlightTarget(weightData);
+		// get editor
+		let editor = vscode.window.activeTextEditor;
+		if (editor) {
+			dynamicHighlightTarget(weightData, editor);
+		}
+		// set cursor monitor
+		vscode.window.onDidChangeTextEditorSelection(
+			(event) => {
+			  const editor = event.textEditor;
+			  if (editor && editor === vscode.window.activeTextEditor) {
+				dynamicHighlightTarget(weightData, editor);
+			  }
+			},
+			null,
+			context.subscriptions
+		  );
 	});
+	// Bold
 	let bold = vscode.commands.registerCommand('attention-highlight.staticBold', () => {
 		openFile('/Users/haotong/attention-highlight/sample.py');
 		let weightData = parseWeight('/Users/haotong/attention-highlight/attention_weight.json');
 		boldTarget(weightData);
 	});
+	// Highlight Bold
 	let highlightbold = vscode.commands.registerCommand('attention-highlight.staticHighlightBold', () => {
 		openFile('/Users/haotong/attention-highlight/sample.py');
 		let weightData = parseWeight('/Users/haotong/attention-highlight/attention_weight.json');
 		highlightBoldTarget(weightData);
 	});
+	// Bolder
 	let border = vscode.commands.registerCommand('attention-highlight.staticBorder', () => {
 		openFile('/Users/haotong/attention-highlight/sample.py');
 		let weightData = parseWeight('/Users/haotong/attention-highlight/attention_weight.json');

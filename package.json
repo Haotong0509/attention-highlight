@@ -17,6 +17,10 @@
         "title": "Static Highlight"
       },
       {
+        "command": "attention-highlight.dynamicHighlight",
+        "title": "Dynamic Highlight"
+      },
+      {
         "command": "attention-highlight.staticBold",
         "title": "Static Bold"
       },
