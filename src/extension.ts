@@ -4,6 +4,7 @@ import * as vscode from 'vscode';
 import { highlightTarget } from './highlight';
 import { boldTarget } from './bold';
 import { highlightBoldTarget } from './highlight_bold';
+import { borderTarget } from './border';
 import { parseWeight } from './parse_weight';
 
 // This method is called when your extension is activated
@@ -17,13 +18,18 @@ export function activate(context: vscode.ExtensionContext) {
 	// The command has been defined in the package.json file
 	// Now provide the implementation of the command with registerCommand
 	// The commandId parameter must match the command field in package.json
-	let highlight = vscode.commands.registerCommand('attention-highlight.staticHighlight', () => {
+	let staticHighlight = vscode.commands.registerCommand('attention-highlight.staticHighlight', () => {
 		// The code you place here will be executed every time your command is executed
 		// Display a message box to the user
 		//vscode.window.showInformationMessage('Hello World!');
 		openFile('/Users/haotong/attention-highlight/sample.py');
 		let weightData = parseWeight('/Users/haotong/attention-highlight/attention_weight.json');
 		//console.log(weightData);
+		highlightTarget(weightData);
+	});
+	let dynamicHighlight = vscode.commands.registerCommand('attention-highlight.dynamicHighlight', () => {
+		openFile('/Users/haotong/attention-highlight/sample.py');
+		let weightData = parseWeight('/Users/haotong/attention-highlight/attention_weight.json');
 		highlightTarget(weightData);
 	});
 	let bold = vscode.commands.registerCommand('attention-highlight.staticBold', () => {
@@ -36,8 +42,13 @@ export function activate(context: vscode.ExtensionContext) {
 		let weightData = parseWeight('/Users/haotong/attention-highlight/attention_weight.json');
 		highlightBoldTarget(weightData);
 	});
+	let border = vscode.commands.registerCommand('attention-highlight.staticBorder', () => {
+		openFile('/Users/haotong/attention-highlight/sample.py');
+		let weightData = parseWeight('/Users/haotong/attention-highlight/attention_weight.json');
+		borderTarget(weightData);
+	});
 
-	context.subscriptions.push(highlight, bold);
+	context.subscriptions.push(staticHighlight, bold, highlightbold, border, dynamicHighlight);
 }
 
 // export async function openFile(path: string) {
