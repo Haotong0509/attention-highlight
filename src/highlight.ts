@@ -29,13 +29,22 @@ export const dynamicHighlightTarget = (obj: object, editor: vscode.TextEditor) =
     let highlightThreshold = 0.4;
     let dynamicWeight = obj as DynamicWeight[];
     let document = editor.document;
-    // get cursor position
+    // get cursor position and offset
     let pos = editor.selection.active;
 	console.log(`Cursor position: Line ${pos.line + 1}, Column ${pos.character + 1}`);
     let offset = document.offsetAt(pos);
+    // highlight related words
+    let relatedIdList: number[];
+    relatedIdList = [];
     for(let i = 0; i < dynamicWeight.length; i++){
         if(dynamicWeight[i].start <= offset && dynamicWeight[i].end >= offset){
-            highlightWord(dynamicWeight[i]);
+            relatedIdList = dynamicWeight[i].relatedId;
+            dynamicHighlightWord(dynamicWeight[i], editor);
+        }
+    };
+    for(let j = 0; j < dynamicWeight.length && relatedIdList.length !== 0; j++){
+        if(dynamicWeight[j].id in relatedIdList && dynamicWeight[j].weight > highlightThreshold){
+            dynamicHighlightWord(dynamicWeight[j], editor);
         }
     };
 };
@@ -52,25 +61,17 @@ export const highlightTarget = (obj: object) => {
     }
 };
 
-export const dynamicHighlightWord = (staticWeight: DynamicWeight) => {
-    let startIndex = staticWeight.start;
-    let endIndex = staticWeight.end;
+export const dynamicHighlightWord = (dynamicWeight: DynamicWeight, editor: vscode.TextEditor) => {
+    let startIndex = dynamicWeight.start;
+    let endIndex = dynamicWeight.end;
      // create decorator
      const decorator = vscode.window.createTextEditorDecorationType({
         overviewRulerLane: vscode.OverviewRulerLane.Center,
-        //borderRadius: '1px',
-        //color: '#001433',
-        //fontWeight: 'bold',
         border:'1px solid #978A8A',
-        backgroundColor: background[Math.round(staticWeight.weight*10)], // set background color according to weight
+        backgroundColor: background[Math.round(dynamicWeight.weight*10)], // set background color according to weight
     });
 
     // get the active text editor
-    let editor = vscode.window.activeTextEditor;
-    if (!editor) {
-        console.log("No open text editor");
- 		return;
- 	}
     let document = editor.document;
     // set the loction of target string
     const startPos = document.positionAt(startIndex);
