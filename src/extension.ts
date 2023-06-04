@@ -31,7 +31,7 @@ export function activate(context: vscode.ExtensionContext) {
 	// Dynamic Highlight
 	let dynamicHighlight = vscode.commands.registerCommand('attention-highlight.dynamicHighlight', () => {
 		openFile('/Users/haotong/attention-highlight/sample.py');
-		let weightData = parseWeight('/Users/haotong/attention-highlight/attention_weight.json');
+		let weightData = parseWeight('/Users/haotong/attention-highlight/dynamic_attention_weight.json');
 		// get editor
 		let editor = vscode.window.activeTextEditor;
 		if (editor) {

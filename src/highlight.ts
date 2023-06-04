@@ -24,11 +24,18 @@ var background:string[];
 //background = ["#201c1c","#31211e","#31211e","#42261f","#532b21","#653023","#763424","#873926","#983e27","#a94329","#a94329"]; //dark orange2
 background = ["#201c1c","#201c1c","#201c1c","#201c1c","#4b4947","#4b4947","#4b4947","#575653","#575653","#63635f","#63635f"]; //bright grey
 
+var decoratorList: vscode.TextEditorDecorationType[];
+decoratorList = [];
+
 export const dynamicHighlightTarget = (obj: object, editor: vscode.TextEditor) => {
 
     let highlightThreshold = 0.4;
     let dynamicWeight = obj as DynamicWeight[];
     let document = editor.document;
+    // remove previous decorators
+    while(decoratorList.length !== 0){
+        decoratorList.pop()?.dispose();
+    }
     // get cursor position and offset
     let pos = editor.selection.active;
 	console.log(`Cursor position: Line ${pos.line + 1}, Column ${pos.character + 1}`);
@@ -42,8 +49,10 @@ export const dynamicHighlightTarget = (obj: object, editor: vscode.TextEditor) =
             dynamicHighlightWord(dynamicWeight[i], editor);
         }
     };
+    console.log(relatedIdList);
     for(let j = 0; j < dynamicWeight.length && relatedIdList.length !== 0; j++){
-        if(dynamicWeight[j].id in relatedIdList && dynamicWeight[j].weight > highlightThreshold){
+        if(relatedIdList.indexOf(dynamicWeight[j].id) > -1 && dynamicWeight[j].weight > highlightThreshold){
+            console.log(dynamicWeight[j].content);
             dynamicHighlightWord(dynamicWeight[j], editor);
         }
     };
@@ -64,13 +73,13 @@ export const highlightTarget = (obj: object) => {
 export const dynamicHighlightWord = (dynamicWeight: DynamicWeight, editor: vscode.TextEditor) => {
     let startIndex = dynamicWeight.start;
     let endIndex = dynamicWeight.end;
-     // create decorator
-     const decorator = vscode.window.createTextEditorDecorationType({
+    // create decorator
+    const decorator = vscode.window.createTextEditorDecorationType({
         overviewRulerLane: vscode.OverviewRulerLane.Center,
-        border:'1px solid #978A8A',
+        //border:'1px solid #978A8A',
         backgroundColor: background[Math.round(dynamicWeight.weight*10)], // set background color according to weight
     });
-
+    decoratorList.push(decorator);
     // get the active text editor
     let document = editor.document;
     // set the loction of target string

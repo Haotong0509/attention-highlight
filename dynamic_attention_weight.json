@@ -1,0 +1,1 @@
+[{"id": 0, "start": 0, "end": 3, "content": "def", "weight": 0.5, "relatedId":[1,2]}, {"id": 1, "start": 3, "end": 4, "content": " ", "weight": 0.005946481665014866, "relatedId":[0]}, {"id": 2, "start": 4, "end": 10, "content": "length", "weight": 0.6, "relatedId":[0]}]
